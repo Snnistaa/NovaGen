@@ -1,5 +1,6 @@
 import asyncio
 import random
+import os
 from datetime import datetime, timedelta
 import discord
 from discord.ext import commands
@@ -7,14 +8,12 @@ from discord.ext import commands
 # Configuration
 CHANNEL_ID = 1548017393199095878  # ID de ton salon
 DISBOARD_ID = 302050872383242240 # ID du bot Disboard
-TOKEN = 'DISCORD_TOKEN'
 
-# Initialisation des intents obligatoires pour les versions récentes
-intents = discord.Intents.default()
-intents.message_content = True
+# Pour un SELFBOT (discord.py-self), on récupère le Token caché dans l'hébergeur
+TOKEN = os.environ.get("DISCORD_TOKEN")
 
-# Initialisation du selfbot (Paramètres mis à jour pour éviter l'erreur d'initialisation)
-bot = commands.Bot(command_prefix="!", intents=intents, chunk_guilds_at_startup=False)
+# INITIALISATION POUR SELFBOT (Pas d'intents nécessaires, évite l'AttributeError)
+bot = commands.Bot(command_prefix="!", chunk_guilds_at_startup=False)
 
 def get_formatted_time(dt=None):
     if dt is None:
@@ -89,4 +88,7 @@ async def on_ready():
     print(f'-----------------------------------')
     bot.loop.create_task(auto_bump_loop())
 
-bot.run(TOKEN)
+if TOKEN:
+    bot.run(TOKEN)
+else:
+    print("[Erreur Critique] Aucun DISCORD_TOKEN trouvé dans les variables d'environnement de l'hébergeur.")
