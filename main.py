@@ -7,7 +7,7 @@ from discord.ext import commands
 # Configuration
 CHANNEL_ID = 1548017393199095878  # ID de ton salon
 DISBOARD_ID = 302050872383242240 # ID du bot Disboard
-TOKEN = 'MTU1MTMwOTE5MTUwMTU4NjU5Mw.GhYdgn.OxMBRpdXu6-LTf3MImuIon_NPtSdchHrwTcKeE'
+TOKEN = 'DISCORD_TOKEN'
 
 # Initialisation des intents obligatoires pour les versions récentes
 intents = discord.Intents.default()
